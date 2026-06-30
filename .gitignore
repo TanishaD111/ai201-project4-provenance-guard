@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# Virtual environment
+.venv/
+venv/
+
+# Runtime data — the audit log is generated at runtime, not source
+audit_log.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
