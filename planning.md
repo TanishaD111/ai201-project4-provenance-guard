@@ -26,11 +26,13 @@ The LLM gets the heavier weight (0.6) because it's the stronger general detector
 **Confidence** is the probability of whichever class the system actually picks:
 
 ```
-result      = "ai"    if combined_p_ai >= 0.5 else "human"
+result      = "ai"        if combined_p_ai >= 0.70
+              "human"     if combined_p_ai <= 0.30
+              "uncertain" otherwise
 confidence  = max(combined_p_ai, 1 - combined_p_ai)      # always in [0.5, 1.0]
 ```
 
-So confidence answers "how sure are we in the call we just made?" — 0.5 is a coin flip, 1.0 is certainty.
+`result` is tri-valued and mirrors the label category, so the top-level attribution is never a confident-looking "ai"/"human" when the system is actually unsure. So confidence answers "how sure are we in the call we just made?" — 0.5 is a coin flip, 1.0 is certainty.
 
 **What a confidence of 0.6 means to the system:** the chosen class won only ~60% of the weighted evidence — a *weak* lean, barely above a guess. It sits below our high-confidence cutoff, so the system refuses to commit and surfaces the **Uncertain** label. A 0.6 is treated as "we noticed something, but don't trust this."
 

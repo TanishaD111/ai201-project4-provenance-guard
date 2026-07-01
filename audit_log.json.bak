@@ -1,0 +1,102 @@
+[
+  {
+    "decision_id": "32aaebc1-0b33-44ec-b546-5c16d01110a1",
+    "creator_id": "human-test",
+    "timestamp": "2026-07-01T01:58:36.555519+00:00",
+    "result": "human",
+    "confidence": 0.7148,
+    "combined_p_ai": 0.2852,
+    "signals": {
+      "llm": {
+        "verdict": "human",
+        "ai_probability": 0.2,
+        "reasoning": "The text has a casual, conversational tone and includes personal, subjective opinions and experiences, which are characteristic of human writing."
+      },
+      "stylometry": {
+        "verdict": "human",
+        "ai_probability": 0.4131,
+        "metrics": {
+          "sentence_length_std": 6.723,
+          "type_token_ratio": 0.873,
+          "punctuation_density": 0.0137,
+          "avg_sentence_length": 11,
+          "std_score": 0.535,
+          "ttr_score": 1.0,
+          "punct_score": 0.0,
+          "complexity_score": 0.118
+        }
+      }
+    },
+    "status": "under_review",
+    "appeals": [
+      {
+        "appeal_id": "93831ed4-2fe3-4e25-9eef-e3d14b6c1da8",
+        "decision_id": "32aaebc1-0b33-44ec-b546-5c16d01110a1",
+        "reasoning": "I wrote this myself from personal experience. I am a non-native English speaker and my writing style may appear more formal than typical.",
+        "timestamp": "2026-07-01T01:58:37.752598+00:00"
+      }
+    ]
+  },
+  {
+    "decision_id": "362468c7-48fb-40bd-a6ea-db36aaffceca",
+    "creator_id": "border-test",
+    "timestamp": "2026-07-01T01:58:37.022795+00:00",
+    "result": "uncertain",
+    "confidence": 0.601,
+    "combined_p_ai": 0.399,
+    "signals": {
+      "llm": {
+        "verdict": "human",
+        "ai_probability": 0.3,
+        "reasoning": "The text has a reflective and nuanced tone, with a balance of personal thoughts and reference to external studies, which suggests a human author."
+      },
+      "stylometry": {
+        "verdict": "ai",
+        "ai_probability": 0.5476,
+        "metrics": {
+          "sentence_length_std": 4.546,
+          "type_token_ratio": 0.905,
+          "punctuation_density": 0.0186,
+          "avg_sentence_length": 14,
+          "std_score": 0.807,
+          "ttr_score": 1.0,
+          "punct_score": 0.09,
+          "complexity_score": 0.294
+        }
+      }
+    },
+    "status": "classified",
+    "appeals": []
+  },
+  {
+    "decision_id": "9fabe984-011a-40cb-b932-35c297e875f2",
+    "creator_id": "ai-test",
+    "timestamp": "2026-07-01T01:58:37.535000+00:00",
+    "result": "ai",
+    "confidence": 0.7536,
+    "combined_p_ai": 0.7536,
+    "signals": {
+      "llm": {
+        "verdict": "ai",
+        "ai_probability": 0.8,
+        "reasoning": "The text's generic and formulaic structure, combined with its overly simplistic and clich\u00e9d advice, suggests a high likelihood of AI generation."
+      },
+      "stylometry": {
+        "verdict": "ai",
+        "ai_probability": 0.684,
+        "metrics": {
+          "sentence_length_std": 2.16,
+          "type_token_ratio": 0.976,
+          "punctuation_density": 0.0327,
+          "avg_sentence_length": 14,
+          "std_score": 1.0,
+          "ttr_score": 1.0,
+          "punct_score": 0.442,
+          "complexity_score": 0.294
+        }
+      }
+    },
+    "status": "classified",
+    "appeals": []
+  }
+]

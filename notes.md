@@ -155,9 +155,10 @@ Classify a piece of content.
       "variant": "high_confidence_ai | high_confidence_human | uncertain",
       "text": "Plain-language transparency label shown to readers."
     },
+    "combined_p_ai": 0.83,
     "signals": {
-      "llm": { "verdict": "ai|human", "confidence": 0.9 },
-      "stylometry": { "verdict": "ai|human", "confidence": 0.7, "metrics": { "...": 0 } }
+      "llm": { "verdict": "ai|human", "ai_probability": 0.9, "reasoning": "..." },
+      "stylometry": { "verdict": "ai|human", "ai_probability": 0.7, "metrics": { "...": 0 } }
     },
     "status": "classified",
     "timestamp": "ISO-8601"

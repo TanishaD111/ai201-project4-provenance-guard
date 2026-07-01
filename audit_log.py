@@ -35,11 +35,14 @@ def _save(entries):
         json.dump(entries, f, indent=2)
 
 
-def record_decision(*, decision_id, creator_id, timestamp, result, confidence, signals, status):
+def record_decision(*, decision_id, creator_id, timestamp, result, confidence,
+                    signals, status, combined_p_ai=None):
     """Append one decision record to the log and return it.
 
     `signals` is the full per-signal detail dict (M3: just llm; M4 adds
     stylometry) so the appeal queue can show both signals' verdicts/scores.
+    `combined_p_ai` is the fused probability (M4) stored alongside the
+    individual signal scores so the audit trail captures how the two combined.
     """
     record = {
         "decision_id": decision_id,
@@ -47,6 +50,7 @@ def record_decision(*, decision_id, creator_id, timestamp, result, confidence, s
         "timestamp": timestamp,
         "result": result,
         "confidence": confidence,
+        "combined_p_ai": combined_p_ai,
         "signals": signals,
         "status": status,
         "appeals": [],  # M5 attaches appeals here, beside the decision they contest
@@ -56,6 +60,33 @@ def record_decision(*, decision_id, creator_id, timestamp, result, confidence, s
         entries.append(record)
         _save(entries)
     return record
+
+
+def add_appeal(*, decision_id, appeal_id, reasoning, timestamp, new_status="under_review"):
+    """Attach an appeal to an existing decision and flip its status.
+
+    Per planning.md "Appeals Workflow": the appeal is appended to the audit log
+    NEXT TO the original decision (in that record's `appeals` list), and the
+    decision's status moves classified -> under_review. No re-classification.
+
+    Returns (updated_record, appeal_record), or (None, None) if `decision_id`
+    is unknown so the caller can return a 404.
+    """
+    appeal = {
+        "appeal_id": appeal_id,
+        "decision_id": decision_id,
+        "reasoning": reasoning,
+        "timestamp": timestamp,
+    }
+    with _lock:
+        entries = _load()
+        for record in entries:
+            if record.get("decision_id") == decision_id:
+                record.setdefault("appeals", []).append(appeal)
+                record["status"] = new_status
+                _save(entries)
+                return record, appeal
+    return None, None
 
 
 def get_entries(limit=None):
